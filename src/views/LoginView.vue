@@ -30,7 +30,7 @@
             </div>
 
             <div class="form-group">
-                <button @click="sendLoginEmail">Entrar</button>
+                <button type="button" @click="sendLoginEmail">Entrar</button>
             </div>
 
             <div>
@@ -44,22 +44,54 @@
                     >
                 </p>
             </div>
+            <div class="form-group">
+                <button type="button" @click="sendLoginGoogle()">Google</button>
+            </div>
         </form>
+        <div>
+            <ErrorComponent :message="errorLogin" />
+        </div>
     </section>
 </template>
 
 <script setup lang="ts">
 import { authService } from "@/core/service/auth.service";
+import router from "@/router";
 import { ref } from "vue";
 
 const email = ref("");
 const senha = ref("");
-
+const errorLogin = ref("");
 function sendLoginEmail() {
-    authService.loginEmail(email.value, senha.value);
+    authService
+        .loginEmail(email.value, senha.value)
+        .then(res => {
+            router.push("/");
+        })
+        .catch(error => {
+            errorLogin.value = error;
+        });
+}
+
+function sendLoginGoogle() {
+    authService
+        .loginGoogle()
+        .then(res => {
+            router.push("/");
+        })
+        .catch(error => {
+            errorLogin.value = error;
+        });
 }
 </script>
 
 <style scoped>
 @import "@/assets/css/login.css";
+
+.alert.alert-danger {
+    position: absolute;
+    top: 100px;
+    width: 50%;
+    margin: auto;
+}
 </style>
