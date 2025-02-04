@@ -10,6 +10,7 @@
         "deploy": "push-dir --dir=dist --branch=gh-pages --cleanup"
     },
     "dependencies": {
+        "barbas-vue-ts": "file:",
         "bootstrap": "^5.3.3",
         "core-js": "^3.8.3",
         "firebase": "^11.1.0",

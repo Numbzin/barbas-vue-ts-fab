@@ -39,11 +39,12 @@
                     <RouterLink to="/person-add">cadastre-se</RouterLink>
                 </p>
                 <p>
-                    <router-link to="/person-recovery"
-                        >esqueceu a senha?</router-link
-                    >
+                    <router-link to="/person-recovery">
+                        esqueceu a senha?
+                    </router-link>
                 </p>
             </div>
+
             <div class="form-group">
                 <button type="button" @click="sendLoginGoogle()">Google</button>
             </div>
@@ -52,6 +53,9 @@
             <ErrorComponent :message="errorLogin" />
         </div>
     </section>
+    <div v-if="errorLogin" class="alert alert-danger" role="alert">
+        {{ errorLogin }}
+    </div>
 </template>
 
 <script setup lang="ts">
@@ -61,7 +65,10 @@ import { ref } from "vue";
 
 const email = ref("");
 const senha = ref("");
-const errorLogin = ref("");
+const errorLogin = ref();
+
+//const user = authService.getAuthUser();
+
 function sendLoginEmail() {
     authService
         .loginEmail(email.value, senha.value)
@@ -87,11 +94,11 @@ function sendLoginGoogle() {
 
 <style scoped>
 @import "@/assets/css/login.css";
-
 .alert.alert-danger {
     position: absolute;
     top: 100px;
+    left: 50%;
     width: 50%;
-    margin: auto;
+    transform: translateX(-50%);
 }
 </style>
