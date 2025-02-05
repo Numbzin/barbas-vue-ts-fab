@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import PersonAdd from "../views/PersonAddView.vue";
+import PersonProfile from "@/views/PersonProfileView.vue";
 
 const routes: Array<RouteRecordRaw> = [
     {
@@ -17,6 +18,11 @@ const routes: Array<RouteRecordRaw> = [
         path: "/person-add",
         name: "Adicionar Usuário",
         component: PersonAdd,
+    },
+    {
+        path: "/profile/:id",
+        name: "Perfil",
+        component: PersonProfile,
     },
     {
         path: "/about",
